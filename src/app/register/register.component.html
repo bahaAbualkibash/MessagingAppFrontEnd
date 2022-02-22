@@ -1,0 +1,38 @@
+<form #registerForm="ngForm" autocomplete="off" (ngSubmit)="register()">
+
+
+    <div class="card card-shadow border-0">
+        <div class="card-body">
+            <div class="row g-6">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h3 class="fw-bold mb-2">Sign Up</h3>
+                        <p>Follow the easy steps</p>
+                    </div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="username" [(ngModel)]="model.username" name="username">
+                    <label for="floatingInput">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="model.password" name="password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <div class="col-12 text-center">
+                    <button class=" btn btn-lg btn-danger" (click)="cancel()">Cancel</button>
+                    <button class="btn btn-block btn-lg btn-primary ms-1" type="submit">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Text -->
+    <div class="text-center mt-8">
+        <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+        <p class=" mb-3 text-muted">© 2021–2022</p>
+
+    </div>
+</form>
