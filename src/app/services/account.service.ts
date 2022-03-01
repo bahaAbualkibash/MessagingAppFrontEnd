@@ -2,12 +2,13 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, ReplaySubject } from 'rxjs';
 import { User } from '../models/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService implements OnInit {
-  baseUrl = 'https://localhost:7173/api/account/';
+  baseUrl = environment.apiUrl + 'account/';
   private currentUserSource = new ReplaySubject<User | null>(1);
   constructor(private http: HttpClient) {}
 
