@@ -37,7 +37,7 @@
             <button class="btn btn-outline-light " type="submit ">Login</button>
         </form>
         <ng-container *ngIf="(accountService.currentUser$ | async) as User">
-
+            <img src="{{User.photoUrl}}" alt="{{User.username}}">
             <a class="nav-link ">Welcome {{User.username}}</a>
         </ng-container>
         <form *ngIf="(accountService.currentUser$ | async) !== null " class="d-flex ">

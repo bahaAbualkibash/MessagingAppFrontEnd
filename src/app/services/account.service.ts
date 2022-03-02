@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class AccountService implements OnInit {
   baseUrl = environment.apiUrl + 'account/';
   private currentUserSource = new ReplaySubject<User | null>(1);
+
   constructor(private http: HttpClient) {}
 
   currentUser$ = this.currentUserSource.asObservable();
@@ -21,26 +22,25 @@ export class AccountService implements OnInit {
       map((response) => {
         let user: User = <User>response;
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
       })
     );
-  }
-
-  setCurrentUser(user: User) {
-    this.currentUserSource.next(user);
   }
 
   register(model: any) {
     return this.http.post<User>(this.baseUrl + 'register', model).pipe(
       map((user: User) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
       })
     );
+  }
+
+  setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUserSource.next(user);
   }
 
   logout() {
