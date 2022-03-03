@@ -1,0 +1,6 @@
+<div class="form-group">
+    <input [class.is-invalid]="ngControl.touched && ngControl.invalid" id="floatingDOB" placeholder="Date Of Birth" class="form-control" [formControl]='$any(ngControl.control)' bsDatepicker [bsConfig]="bsConfig" [maxDate]="maxDate" type="text">
+
+    <div *ngIf="ngControl.control?.errors?.['required']" class="invalid-feedback">Please enter a {{label}}</div>
+
+</div>

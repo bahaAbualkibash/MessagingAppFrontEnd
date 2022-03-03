@@ -1,0 +1,7 @@
+<div class="form-floating mb-3">
+    <input [class.is-invalid]="ngControl.invalid && ngControl.touched" type="{{type}}" class="form-control" id="floating{{label}}" placeholder="Password" [formControl]="$any(ngControl.control)">
+    <label for="floating{{label}}">{{label}}</label>
+    <div *ngIf="ngControl.control?.errors?.['required']" class="invalid-feedback">Please enter a {{label}}</div>
+    <div *ngIf="ngControl.control?.errors?.['minlength']" class="invalid-feedback"> {{label}} Must be at least {{ngControl.control?.errors?.['minlength']?.['requiredLength']}} {{label}}</div>
+    <div *ngIf="ngControl.control?.errors?.['isMatching']" class="invalid-feedback"> Passwords do not match </div>
+</div>

@@ -1,4 +1,4 @@
-<form #registerForm="ngForm" autocomplete="off" (ngSubmit)="register()">
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="registerForm.valid && register()">
 
 
     <div class="card card-shadow border-0">
@@ -11,18 +11,37 @@
                     </div>
                 </div>
 
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="username" [(ngModel)]="model.username" name="username">
-                    <label for="floatingInput">Username</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="model.password" name="password">
-                    <label for="floatingPassword">Password</label>
+                <app-text-input [formControl]="$any(registerForm.controls['username'])" [type]="'text'" [label]="'Username'"></app-text-input>
+                <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" [type]="'text'" [label]="'Known As'"></app-text-input>
+                <app-date-input [formControl]="$any(registerForm.controls['dateOfBirth'])" [maxDate]="maxDate" [label]="'Date of Birth'"></app-date-input>
+                <app-text-input [formControl]="$any(registerForm.controls['city'])" [type]="'text'" [label]="'City'"></app-text-input>
+                <app-text-input [formControl]="$any(registerForm.controls['country'])" [type]="'text'" [label]="'Country'"></app-text-input>
+                <app-text-input [formControl]="$any(registerForm.controls['password'])" [type]="'password'" [label]="'Password'"></app-text-input>
+                <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" [type]="'password'" [label]="'Confirm Password'"></app-text-input>
+                <div class="form-inline">
+                    <label class="me-2">I am a:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male">
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female">
+                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                    </div>
                 </div>
 
+                <div class="row " *ngIf="validationErrors">
+                    <ul class="text-danger">
+                        <li *ngFor="let error of validationErrors">
+                            {{error}}
+                        </li>
+                    </ul>
+                </div>
+
+
                 <div class="col-12 text-center">
-                    <button class=" btn btn-lg btn-danger" (click)="cancel()">Cancel</button>
-                    <button class="btn btn-block btn-lg btn-primary ms-1" type="submit">Create Account</button>
+                    <button class=" btn btn-lg btn-danger" type="button" (click)=" cancel()">Cancel</button>
+                    <button [disabled]="!registerForm.valid" class="btn btn-block btn-lg btn-primary ms-1" type="submit">Create Account</button>
                 </div>
             </div>
         </div>
@@ -34,5 +53,8 @@
         <p>Already have an account? <a href="./signin.html">Sign in</a></p>
         <p class=" mb-3 text-muted">© 2021–2022</p>
 
+        <p>Form value: {{registerForm.value | json}}</p>
+        <p>Form status: {{registerForm.status}}</p>
     </div>
+
 </form>
