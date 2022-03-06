@@ -38,7 +38,7 @@
         </form>
         <ng-container *ngIf="(accountService.currentUser$ | async) as User">
             <img src="{{User.photoUrl || './assets/user.png'}} " alt="{{User.username}}">
-            <a class="nav-link ">Welcome {{User.username}}</a>
+            <a class="nav-link ">Welcome {{User.knownAs}}</a>
         </ng-container>
         <form *ngIf="(accountService.currentUser$ | async) !== null " class="d-flex ">
             <button class="btn btn-outline-danger " (click)="logout() " type="submit ">Logout</button>
