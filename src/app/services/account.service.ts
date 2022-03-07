@@ -44,8 +44,6 @@ export class AccountService implements OnInit {
   }
 
   logout() {
-    console.log(localStorage.getItem('user'));
-
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
   }
